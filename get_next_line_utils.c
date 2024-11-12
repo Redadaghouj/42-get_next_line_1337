@@ -52,7 +52,7 @@ char	*ft_strjoin(char const *s1, char const *s2, int byte_read)
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
 	size_t	i;
-	size_t	size;
+	// size_t	size;
 	char	*str;
 
 	if (start > ft_strlen(s) || s[0] == '\0')
