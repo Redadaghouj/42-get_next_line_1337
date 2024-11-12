@@ -6,7 +6,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-# define BUFFER_SIZE 1000
+# define BUFFER_SIZE 6
 
 char    *get_next_line(int fd);
 size_t	ft_strlen(const char *s);

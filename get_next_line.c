@@ -21,7 +21,7 @@ char    *get_next_line(int fd)
 	char        *what_left_line;
 	static char *save_lines;
 	int         end_line;
-	char        buffer[BUFFER_SIZE];
+	char        buffer[BUFFER_SIZE + 1];
 
 	while(1)
 	{
@@ -33,12 +33,13 @@ char    *get_next_line(int fd)
 			return (line);
 		}
 		byte_read = read(fd, buffer, BUFFER_SIZE);
+		buffer[BUFFER_SIZE] = '\0';
 		if (byte_read == 0)
 			return (save_lines);
 		end_line = check_line(byte_read, buffer);
 		if (end_line != -1)
 		{
-			what_left_line = ft_substr(buffer, end_line + 1, ft_strlen(buffer));
+			what_left_line = ft_substr(buffer, end_line + 1, ft_strlen(buffer) - end_line - 1);
 			line = ft_substr(buffer, 0, end_line + 1);
 			line = ft_strjoin(save_lines, line, ft_strlen(line));
 			save_lines = ft_strdup(what_left_line);
