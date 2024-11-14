@@ -23,11 +23,13 @@ char    *get_next_line(int fd)
 	char        buffer[BUFFER_SIZE + 1];
 	char		*tmp_buffer;
 
+	end_line = -1;
 	if (fd < 0 || BUFFER_SIZE < 1)
         return (NULL);
 	while(1)
 	{
-		end_line = check_line(ft_strlen(stored_line) - 1, stored_line);
+		if (stored_line)
+			end_line = check_line(ft_strlen(stored_line) - 1, stored_line);
 		if (end_line != -1)
 		{
 			line = ft_substr(stored_line, 0, end_line + 1);
@@ -39,8 +41,8 @@ char    *get_next_line(int fd)
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
-			if (stored_line)
-				free(stored_line);
+			free(stored_line);
+			stored_line = NULL;
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
