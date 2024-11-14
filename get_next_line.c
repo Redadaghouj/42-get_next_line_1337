@@ -14,19 +14,24 @@ int check_line(int bytes_read, char buffer[])
 	return -1;
 }
 
-char    *get_next_line(int fd)
+char *get_next_line(int fd)
 {
 	int         bytes_read;
 	char        *line;
 	static char *stored_line;
 	int         end_line;
-	char        buffer[BUFFER_SIZE + 1];
-	char		*tmp_buffer;
+	char        *buffer;
+	char        *tmp_buffer;
 
 	end_line = -1;
 	if (fd < 0 || BUFFER_SIZE < 1)
-        return (NULL);
-	while(1)
+		return (NULL);
+
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
+
+	while (1)
 	{
 		if (stored_line)
 			end_line = check_line(ft_strlen(stored_line) - 1, stored_line);
@@ -35,7 +40,8 @@ char    *get_next_line(int fd)
 			line = ft_substr(stored_line, 0, end_line + 1);
 			tmp_buffer = ft_substr(stored_line, end_line + 1, ft_strlen(stored_line) - end_line - 1);
 			free(stored_line);
-            stored_line = tmp_buffer;
+			stored_line = tmp_buffer;
+			free(buffer);
 			return (line);
 		}
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
@@ -43,30 +49,33 @@ char    *get_next_line(int fd)
 		{
 			free(stored_line);
 			stored_line = NULL;
+			free(buffer);
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
-        if (bytes_read == 0)
-        {
+		if (bytes_read == 0)
+		{
+			free(buffer);
 			if (stored_line && *stored_line == '\0')
 			{
 				free(stored_line);
 				stored_line = NULL;
 				return (NULL);
 			}
-            tmp_buffer = stored_line;
-            stored_line = NULL;
-            return (tmp_buffer);
-        }
+			tmp_buffer = stored_line;
+			stored_line = NULL;
+			return (tmp_buffer);
+		}
 		end_line = check_line(bytes_read, buffer);
 		if (end_line != -1)
 		{
-			tmp_buffer = ft_substr(buffer, 0, end_line + 1);
+			tmp_buffer = ft_substr(buffer, 0, end_line + 1);			
 			line = ft_strjoin(stored_line, tmp_buffer);
 			free(tmp_buffer);
 			tmp_buffer = ft_substr(buffer, end_line + 1, ft_strlen(buffer) - end_line - 1);
 			free(stored_line);
 			stored_line = tmp_buffer;
+			free(buffer);
 			return (line);
 		}
 		tmp_buffer = ft_strjoin(stored_line, buffer);
