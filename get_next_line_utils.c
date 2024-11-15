@@ -1,4 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/15 10:24:31 by mdaghouj          #+#    #+#             */
+/*   Updated: 2024/11/15 10:36:15 by mdaghouj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
+
+int	check_line(int bytes_read, char *buffer)
+{
+	int	i;
+
+	i = 0;
+	while (i < bytes_read)
+	{
+		if (buffer[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
 
 size_t	ft_strlen(const char *s)
 {
