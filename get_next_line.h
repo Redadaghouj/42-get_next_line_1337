@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 10:24:27 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/11/15 11:16:27 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:25:26 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-# define BUFFER_SIZE 1024
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
