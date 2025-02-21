@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 10:24:11 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/11/15 10:30:42 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:54:27 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*find_newline(char **stored_line, int end_line, char **buffer, int flag)
 	free(*stored_line);
 	*stored_line = tmp_buff;
 	free(*buffer);
+	*buffer = NULL;
+	free(tmp_buff);
 	return (line);
 }
 
@@ -62,6 +64,7 @@ char	*free_vars(char **stored_line, char **buffer, int flag)
 		free(*stored_line);
 		*stored_line = NULL;
 		free(*buffer);
+		*buffer = NULL;
 	}
 	else
 	{
@@ -110,3 +113,12 @@ char	*get_next_line(int fd)
 		free_vars(&stored_line, &buffer, 0);
 	}
 }
+// #include <stdio.h>
+// #include <fcntl.h>
+
+// int main (void)
+// {
+//     int fd = open("file.txt", O_RDONLY);
+// 	printf("%s", get_next_line(fd));
+//     return (0);
+// }
