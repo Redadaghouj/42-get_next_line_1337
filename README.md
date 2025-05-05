@@ -1,6 +1,7 @@
 # Get Next Line - 1337 Project  
 
-[![1337 Badge](https://img.shields.io/badge/1337-Project-blue)](https://www.42network.org/)  
+[![1337 Badge](https://img.shields.io/badge/1337-Project-blue)](https://www.42network.org/)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen) ![Grade](https://img.shields.io/badge/Grade-112%2F100-success)
 
 ## 📜 Project Overview  
 
